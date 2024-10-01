@@ -1,8 +1,10 @@
 from utils.csv_helper import get_dictionary_from_csv
 import re
 from utils.strings import extract_numbers
+from math import prod
 
 sumOfGames = 0
+sumOfMultiplication = 0
 dictionary = get_dictionary_from_csv('./csv_files/day_2.csv', True, ";",":")
 
 colorMap = {"red": 12,"green": 13,"blue": 14}
@@ -12,6 +14,7 @@ regex = r"(\d+)\s+(\w+)"
 for key, value in dictionary.items():
     gameID = int("".join(extract_numbers(key)))
     possible = True
+    fewestPossibleMap = {"red": 0,"green": 0,"blue": 0}
 
     for v in value:
         splittedValues = v.split(",")
@@ -24,9 +27,14 @@ for key, value in dictionary.items():
 
                 if int(number) > colorMap[color]:
                     possible = False
-                    break
+                
+                if int(number) > fewestPossibleMap[color]:
+                    fewestPossibleMap[color] = int(number)
     
     if possible:
         sumOfGames += gameID
+    
+    sumOfMultiplication += prod(fewestPossibleMap.values())
 
-print(sumOfGames)
+print(f"Number of possible games on part 1: {sumOfGames}")
+print(f"Sum of the fewest possible games on part 2: {sumOfMultiplication}")
