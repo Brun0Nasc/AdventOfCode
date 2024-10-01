@@ -1,6 +1,5 @@
-import re     
 from utils.csv_helper import get_list_from_csv
-from utils.numbers import extract_numbers
+from utils.strings import extract_numbers
 
 strings = get_list_from_csv('./csv_files/day_1.csv')
 
