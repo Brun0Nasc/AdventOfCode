@@ -1,0 +1,24 @@
+import re
+
+number_words = {
+    "zero": '0',
+    "one": '1',
+    "two": '2',
+    "three": '3',
+    "four": '4',
+    "five": '5',
+    "six": '6',
+    "seven": '7',
+    "eight": '8',
+    "nine": '9',
+}
+
+def extract_numbers(text):
+    pattern = '|'.join(number_words.keys())
+    matches = re.findall(r'[0-9]|'+pattern, text)
+
+    for i in matches:
+        if i in number_words:
+            matches[matches.index(i)] = number_words[i]
+    
+    return matches

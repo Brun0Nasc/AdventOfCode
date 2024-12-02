@@ -22,14 +22,14 @@ for key, value in dictionary.items():
         for item in splittedValues:
             match = re.search(regex, item)
             if match:
-                number = match.group(1)
+                number = int(match.group(1))
                 color = match.group(2)
 
-                if int(number) > colorMap[color]:
+                if number > colorMap[color]:
                     possible = False
                 
-                if int(number) > fewestPossibleMap[color]:
-                    fewestPossibleMap[color] = int(number)
+                if number > fewestPossibleMap[color]:
+                    fewestPossibleMap[color] = number
     
     if possible:
         sumOfGames += gameID
